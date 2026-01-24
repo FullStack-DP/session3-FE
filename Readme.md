@@ -45,7 +45,8 @@ We'll follow a 5-step learning cycle as shown in the figure below:
 - [Spread operator](./material/react-summary.md#part-3-the-spread-operator)
 - **Level 5 (Advanced):** We will be refactoring an HTML website into a React app, applying the concepts that we've covered in the past weeks, such as rendering lists, converting HTML to JSX, and styling React components.
   - [Pair Programming](./material/fe-pair-programming/README.md)
-- **Level 1 (Beginner):** [Pair Programming](./material/fe-pp-l1.md)
+- **Level 1 (Beginner):** 
+  - [Pair Programming](./material/fe-pp-l1.md)
 
 
 -----
@@ -67,7 +68,7 @@ We'll follow a 5-step learning cycle as shown in the figure below:
 
 - https://excalidraw.com/
 - https://react-projects.netlify.app/
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/- Destructuring#array_destructuring
+- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring#array_destructuring
 - https://javascript.info/introduction-browser-events
 - https://react.dev/learn/reacting-to-input-with-state#how-declarative-ui-compares-to-imperative
 
