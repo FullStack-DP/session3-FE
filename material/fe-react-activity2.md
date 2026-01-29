@@ -23,7 +23,7 @@ When you finish this practice, you should be able to
 ---
 
 
-## Setup
+## Step 0: Setup
 
 Open your terminal and run:
 
@@ -44,7 +44,9 @@ Optional cleanup (recommended for beginners):
 - Clear the default CSS in `src/index.css` and `src/App.css` so styling doesn’t distract from the form behavior.
 
 
-## Creating a simple form
+---
+
+## Step 1: Create a simple form
 
 To learn how to create HTML forms in React, you will create a `ContactUs`
 functional component that will contain a simple `Contact Us` form. The form will
@@ -57,7 +59,7 @@ contain five fields:
   work, or mobile
 - Comments - A `textarea` field for comments
 
-## Defining the `ContactUs` form component
+### Define the `ContactUs` form component
 
 To start, add a functional component named `ContactUs` that renders an HTML form
 with `Name`, `Email`, and `Phone` fields:
@@ -91,10 +93,46 @@ function ContactUs() {
 export default ContactUs;
 ```
 
+<details>
+<summary>Complete src/ContactUs.jsx (After Step 1)</summary>
+
+```jsx
+function ContactUs() {
+  return (
+    <div>
+      <h2>Contact Us</h2>
+      <form>
+        <div>
+          <label htmlFor='name'>Name:</label>
+          <input id='name' type='text' />
+        </div>
+        <div>
+          <label htmlFor='email'>Email:</label>
+          <input id='email' type='text' />
+        </div>
+        <div>
+          <label htmlFor='phone'>Phone:</label>
+          <input id='phone' type='text' />
+        </div>
+        <button>Submit</button>
+      </form>
+    </div>
+  );
+}
+
+export default ContactUs;
+```
+
+</details>
+
 
 So far, there's nothing particularly interesting about this form. The only thing
 that looks different from regular HTML is that the `<label>` element's `for`
 attribute is `htmlFor` in React.
+
+---
+
+## Step 2: Render `ContactUs` in App.jsx
 
 Be sure to update your __App.jsx__ to render the `ContactUs` component:
 
@@ -112,12 +150,30 @@ function App() {
 export default App;
 ```
 
+<details>
+<summary>Complete src/App.jsx (After Step 2)</summary>
+
+```jsx
+import ContactUs from './ContactUs';
+import './App.css';
+
+function App() {
+  return <ContactUs />;
+}
+
+export default App;
+```
+
+</details>
+
 
 Look at the form in your browser. You can fill out the form, but the component
 currently doesn't know what the form input values are. To keep track of each of
 the input values, you will need to initialize and maintain component state.
 
-## Adding state to the component
+---
+
+## Step 3: Add state to the component (`useState`)
 
 To add state to the `ContactUs` component, import `useState` from React.
 Initialize three state variables--`name`, `email`, and `phone`--as empty
@@ -202,6 +258,10 @@ is never updated. Accordingly, the `Name` field will always be an empty string.
 To fix this, you need to update the `name` state variable whenever the user
 types into the field.
 
+---
+
+## Step 4: Add `onChange` handlers (make inputs controlled)
+
 More generally, the associated component state variable needs to be updated
 whenever a user changes a form field element value. Adding or removing a
 character within an `<input>` element raises the `onChange` event, which makes
@@ -285,7 +345,9 @@ change in real time in the console.
 
 ![onchange event handler](./img/form.png)
 
-## Adding a `select` list
+---
+
+## Step 5: Add a `select` list (Phone Type)
 
 To maintain symmetry across React form element types, the `<select>` element
 also uses a `value` attribute to get and set the element's selected option. To
@@ -390,7 +452,9 @@ export default ContactUs;
 Note that you can leave the first `Select a phone type...` `<option>` element
 as an empty value element before rendering the other `<option>` elements.
 
-## Adding a `textarea`
+---
+
+## Step 6: Add a `textarea` (Comments)
 
 In a regular HTML form, the value for a `<textarea>` element is defined by its
 inner content:
@@ -497,7 +561,9 @@ export default ContactUs;
 
 </details>
 
-## Handling form submissions
+---
+
+## Step 7: Handle form submissions (`onSubmit` + `preventDefault`)
 
 Now that the `ContactUs` component is initializing and updating state as form
 field values change, it's time to handle form submissions! To start, create an
@@ -605,6 +671,10 @@ export default ContactUs;
 ```
 
 </details>
+
+---
+
+## Step 8: Build and log a submission object
 
 Still in `onSubmit`, use the `name`, `email`, `phone`, `comments`, and
 `phoneType` values from state to create a new `contactUsInformation` object
@@ -725,6 +795,10 @@ Notice that an additional property, `submittedOn`, is being added to the
 information was submitted. Ideally, the `contactUsInformation` object would be
 persisted to a database using a RESTful API, but for now, you can just log the
 object to the console.
+
+---
+
+## Step 9: Reset the form after submit
 
 Once the form submission has been processed, reset all the state values to empty
 strings:
@@ -855,7 +929,9 @@ You can now fill out each form field in your browser. When you click `Submit`,
 an object containing your `Contact Us` information should appear in the console!
 Also, note that the page doesn't reload.
 
-## Controlled components
+---
+
+## Step 10: Controlled components (concept)
 
 You now have a functioning React form! In creating it, you used what are known
 as _controlled components_.

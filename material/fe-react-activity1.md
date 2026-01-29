@@ -33,8 +33,8 @@ Before starting the lab steps, set up a React project so you have a place to run
 2. Create a new React project using Vite (full guide: [vite.md](./vite.md)). In brief, run:
 
   ```bash
-  npx create-vite@latest useState-lab --template react
-  cd useState-lab
+  npx create-vite@latest w3-fe-lab1 --template react
+  cd w3-fe-lab1b
   npm install
   npm run dev
   ```
