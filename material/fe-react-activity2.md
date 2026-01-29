@@ -39,10 +39,9 @@ Then start the dev server:
 npm run dev
 ```
 
-Optional cleanup (recommended for beginners):
-
-- Clear the default CSS in `src/index.css` and `src/App.css` so styling doesn’t distract from the form behavior.
-
+- Recommended clean up the default styles so they do not interfere with the lab:
+  - In `src/index.css`, remove the default CSS (you can leave it empty).
+  - In `src/App.css`, remove the default CSS (you can leave it empty).
 
 ---
 
@@ -93,16 +92,13 @@ function ContactUs() {
 export default ContactUs;
 ```
 
-### Optional: Add basic styles (no classes)
+### Add basic styles (Optional)
 
 If you want the form to look nicer while keeping the React code focused on `useState`, add a CSS file that uses **HTML element selectors**.
 
 Create:
 
 - `src/ContactUs.css`
-
-<details>
-<summary>Complete src/ContactUs.css (Optional styles)</summary>
 
 ```css
 body {
@@ -177,9 +173,6 @@ button:hover {
 }
 ```
 
-</details>
-
-
 So far, there's nothing particularly interesting about this form. The only thing
 that looks different from regular HTML is that the `<label>` element's `for`
 attribute is `htmlFor` in React.
@@ -194,18 +187,13 @@ Be sure to update your __App.jsx__ to render the `ContactUs` component:
 // src/App.jsx
 
 import ContactUs from './ContactUs';
+import './ContactUs.css';
 
 function App() {
   return <ContactUs />;
 }
 
 export default App;
-```
-
-If you created `src/ContactUs.css` in Step 1, import it in `src/App.jsx` too:
-
-```jsx
-import './ContactUs.css';
 ```
 
 Look at the form in your browser. You can fill out the form, but the component
