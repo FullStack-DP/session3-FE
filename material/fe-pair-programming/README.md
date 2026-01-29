@@ -9,11 +9,9 @@ In this pair programming activity, we will transform an existing HTML webpage in
 
 > [!IMPORTANT]
 > - **No vibe coding** (no blind copy/paste). Every student is expected to **review and understand** every line they submit.
-> - If you use AI for help, you must be able to explain your code.
 > - The session **will be recorded** in your laptop so **please remove any personal** items from Desktop
-> - When creating React components, start by building the component structure and functionality (JSX + logic). Add styling only after the component works as intended.
-> - Each component must have at least **two commits**: one after completing the React logic and another after finishing the CSS. Grading will focus **primarily on the component’s structure, not its styling.**
-
+> - Try tackling each iteration with your pair first. Most iterations have a sample solution [in this file](./fe-pp-sample-sol.md), so if you get stuck, take a look, walk through it, and see what you can learn from it. Once you understand it, think about how you might make the code even better. 
+> - Using AI to help you understand the solution is fine.
 
 ----
 
@@ -26,13 +24,6 @@ In this pair programming activity, we will transform an existing HTML webpage in
 4. In your reflection journal, provide the link to the created repository. 
 5. Keep the repository private until Sunday.
 6. Include in your reflection journal the style you used during the pair programming session. For reference, here’s a brief introduction to the different styles of pair programming: [The Different Styles of Pair Programming](https://www.drovio.com/blog/the-different-styles-of-pair-programming/).  
-
-
----------
-
-> [!TIP] 
-> - Try tackling each iteration with your pair first. Most iterations have a sample solution [in this file](./fe-pp-sample-sol.md), so if you get stuck, take a look, walk through it, and see what you can learn from it. Once you understand it, think about how you might make the code even better. 
-> - Using AI to help you understand the solution is totally fine.
 
 
 --------
