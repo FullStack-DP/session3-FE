@@ -194,7 +194,6 @@ Be sure to update your __App.jsx__ to render the `ContactUs` component:
 // src/App.jsx
 
 import ContactUs from './ContactUs';
-import './App.css';
 
 function App() {
   return <ContactUs />;
