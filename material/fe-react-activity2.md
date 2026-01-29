@@ -193,24 +193,7 @@ Be sure to update your __App.jsx__ to render the `ContactUs` component:
 ```jsx
 // src/App.jsx
 
-import ContactUs from './ContactUs'
-import './ContactUs.css'
-
-function App() {
-  return (
-    <ContactUs />
-  );
-}
-
-export default App;
-```
-
-<details>
-<summary>Complete src/App.jsx (After Step 2)</summary>
-
-```jsx
 import ContactUs from './ContactUs';
-import './ContactUs.css';
 import './App.css';
 
 function App() {
@@ -220,8 +203,11 @@ function App() {
 export default App;
 ```
 
-</details>
+If you created `src/ContactUs.css` in Step 1, import it in `src/App.jsx` too:
 
+```jsx
+import './ContactUs.css';
+```
 
 Look at the form in your browser. You can fill out the form, but the component
 currently doesn't know what the form input values are. To keep track of each of
@@ -399,7 +385,7 @@ component's state update as you type within each of the form fields (i.e., the
 `<input>` elements). You can `console.log(name)` above your return to see this
 change in real time in the console.
 
-<!-- ![onchange event handler](./img/form.png) -->
+![onchange event handler](./img/form.png)
 
 ---
 
