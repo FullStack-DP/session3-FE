@@ -1,7 +1,10 @@
 # Front End Pair programming
 
+In this pair programming activity, we will transform an existing HTML webpage into a React app with the following component structure:
 
+![](./img/App.png)
 
+----
 
 
 > [!IMPORTANT]
@@ -12,12 +15,7 @@
 > - Each component must have at least **two commits**: one after completing the React logic and another after finishing the CSS. Grading will focus **primarily on the component’s structure, not its styling.**
 
 
--------
-
-In this pair programming activity, we will transform an existing HTML webpage into a React app with the following component structure:
-
-![](./img/App.png)
-
+----
 
 ## Setup
 
@@ -29,14 +27,16 @@ In this pair programming activity, we will transform an existing HTML webpage in
 5. Keep the repository private until Sunday.
 6. Include in your reflection journal the style you used during the pair programming session. For reference, here’s a brief introduction to the different styles of pair programming: [The Different Styles of Pair Programming](https://www.drovio.com/blog/the-different-styles-of-pair-programming/).  
 
-## Instructions
 
-
+---------
 
 > [!NOTE] 
 > Try tackling each iteration with your pair first and avoid jumping straight into vibe‑coding. Most iterations have a sample solution [in this file](./fe-pp-sample-sol.md), so if you get stuck, take a look, walk through it carefully, and see what you can learn from it. Once you understand it, think about how you might make the code even better. And yes — using AI to help you understand the solution is totally fine.
 
 
+--------
+
+## Instructions
 
 ### Iteration 0: Project Setup
 
