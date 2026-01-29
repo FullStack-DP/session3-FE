@@ -57,7 +57,7 @@ We'll follow a 5-step learning cycle as shown in the figure below:
 - ~~Draw.io~~
 - We'll discuss event handlers. These custom functions will respond to user interactions such as clicks and form input focus. Additionally, we'll explore React states, which manage component-specific data and memory.
   - **Slides**: Outcome of the session
-  - [Summary](./material/react.md)
+  - Summary:  [useState Concepts](./material/react.md), [Forms Core Concepts](./material/react2.md)
   - [Demo](./material/src/)
   - [Activity 1](./material/fe-react-activity1.md)
   - [Activity 2](./material/fe-react-activity2.md)

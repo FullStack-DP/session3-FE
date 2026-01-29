@@ -1,5 +1,5 @@
 
-# React `useState`: Concepts from the Counter Lab
+# React `useState` Concepts 
 
 This document explains the core concepts introduced in the `useState` Counter + Theme lab. The focus is on how React handles events and UI updates, and why state is the mechanism used to make the UI respond to user actions.
 
