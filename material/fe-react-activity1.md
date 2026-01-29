@@ -33,7 +33,7 @@ Before starting the lab steps, set up a React project so you have a place to run
 
   ```bash
   npx create-vite@latest w3-fe-lab1 --template react
-  cd w3-fe-lab1b
+  cd w3-fe-lab1
   npm install
   npm run dev
   ```
@@ -56,7 +56,7 @@ Before starting the lab steps, set up a React project so you have a place to run
 
    const Counter = () => {
    return (
-      <div className="state">
+    <div className="content">
          <h1>UseState Component</h1>
          <button>Dark</button>
          <button>Light</button>
@@ -79,7 +79,7 @@ Before starting the lab steps, set up a React project so you have a place to run
    border-radius: 5px;
    }
 
-   .state {
+  .content {
    display: flex;
    flex-direction: column;
    justify-content: center;
@@ -154,7 +154,7 @@ This keeps UI and behavior organized inside components.
 - **You won’t see UI changes until state changes.** `console.log()` confirms the click happened, but it won’t change what’s rendered.
 - **Where state “lives” matters.** If you use a normal variable (Step 4), React won’t re-render when it changes.
 - **Using a normal variable inside the component is even trickier.** In React, the component function re-runs on re-render, so normal variables can reset to their initial value.
-- **The theme works because of CSS class names.** The JSX uses ``className={`state ${theme}`}`` which relies on `.light` and `.dark` existing in `Counter.css`.
+- **The theme works because of CSS class names.** The JSX uses ``className={`content ${theme}`}`` which relies on `.light` and `.dark` existing in `Counter.css`.
 - **Hook rule (important):** `useState` must be called at the top level of the component (not inside `if`, loops, or nested functions).
 
 ---
@@ -172,7 +172,7 @@ const Counter = () => {
   };
 
   return (
-    <div className="state">
+    <div className="content">
       <h1>UseState Component</h1>
       <button onClick={handleClick}>Dark</button>
       <button onClick={handleClick}>Light</button>
@@ -203,7 +203,7 @@ const Counter = () => {
   };
 
   return (
-    <div className="state">
+    <div className="content">
       <h1>UseState Component</h1>
       <button onClick={handleClick}>Dark</button>
       <button onClick={handleClick}>Light</button>
@@ -264,7 +264,7 @@ const Counter = () => {
   };
 
   return (
-    <div className="state">
+    <div className="content">
       <h1>UseState Component</h1>
       <button onClick={handleDarkClick}>Dark</button>
       <button onClick={handleLightClick}>Light</button>
@@ -321,7 +321,7 @@ const Counter = () => {
   };
 
   return (
-    <div className={`state ${theme}`}>
+    <div className={`content ${theme}`}>
       <h1>UseState Component</h1>
       <button onClick={setDarkTheme}>Dark</button>
       <button onClick={setLightTheme}>Light</button>
@@ -358,14 +358,17 @@ const [theme, setTheme] = useState('light');
 Update JSX:
 
 ```jsx
-<div className={`state ${theme}`}>
+<div className={`content ${theme}`}>
 ```
 
 Add handlers:
 
 ```jsx
-<button onClick={() => setTheme('dark')}>Dark</button>
-<button onClick={() => setTheme('light')}>Light</button>
+const setDarkThemeHandler = () => setTheme('dark');
+const setLightThemeHandler = () => setTheme('light');
+
+<button onClick={setDarkThemeHandler}>Dark</button>
+<button onClick={setLightThemeHandler}>Light</button>
 ```
 
 ### Explanation
@@ -384,11 +387,19 @@ import { useState } from 'react';
 const Counter = () => {
   const [theme, setTheme] = useState('light');
 
+  const setDarkThemeHandler = () => {
+    setTheme('dark');
+  };
+
+  const setLightThemeHandler = () => {
+    setTheme('light');
+  };
+
   return (
-    <div className={`state ${theme}`}>
+    <div className={`content ${theme}`}>
       <h1>UseState Component</h1>
-      <button onClick={() => setTheme('dark')}>Dark</button>
-      <button onClick={() => setTheme('light')}>Light</button>
+      <button onClick={setDarkThemeHandler}>Dark</button>
+      <button onClick={setLightThemeHandler}>Light</button>
     </div>
   );
 };
@@ -400,19 +411,19 @@ export default Counter;
 
 ---
 
-## Step 6: Toggling Theme Using Previous State
+## Step 6: Toggling Theme
 
 ```jsx
 const toggleThemeHandler = () => {
-  setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+  setTheme(theme === 'light' ? 'dark' : 'light');
 };
 ```
 
 ### Explanation
 
-* React gives access to the previous state value
-* This is useful when the new state depends on the old one
-* This is the **callback (functional update)** form of `setTheme` (the same idea is used again in Step 9)
+* This is the **direct** update form: it uses the current `theme` variable
+* It is simple and works well when you only toggle once per click
+* In Step 9, you will see why React sometimes prefers the callback (functional update) form when multiple updates happen close together
 
 <details>
 <summary>Complete Counter.jsx (After Step 6 — toggle theme)</summary>
@@ -424,15 +435,23 @@ import { useState } from 'react';
 const Counter = () => {
   const [theme, setTheme] = useState('light');
 
+  const setDarkThemeHandler = () => {
+    setTheme('dark');
+  };
+
+  const setLightThemeHandler = () => {
+    setTheme('light');
+  };
+
   const toggleThemeHandler = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
-    <div className={`state ${theme}`}>
+    <div className={`content ${theme}`}>
       <h1>UseState Component</h1>
-      <button onClick={() => setTheme('dark')}>Dark</button>
-      <button onClick={() => setTheme('light')}>Light</button>
+      <button onClick={setDarkThemeHandler}>Dark</button>
+      <button onClick={setLightThemeHandler}>Light</button>
       <button onClick={toggleThemeHandler}>Toggle Theme</button>
     </div>
   );
@@ -478,15 +497,23 @@ import { useState } from 'react';
 const Counter = () => {
   const [theme, setTheme] = useState('light');
 
+  const setDarkThemeHandler = () => {
+    setTheme('dark');
+  };
+
+  const setLightThemeHandler = () => {
+    setTheme('light');
+  };
+
   const toggleThemeHandler = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
-    <div className={`state ${theme}`}>
+    <div className={`content ${theme}`}>
       <h1>UseState Component</h1>
-      <button onClick={() => setTheme('dark')}>Dark</button>
-      <button onClick={() => setTheme('light')}>Light</button>
+      <button onClick={setDarkThemeHandler}>Dark</button>
+      <button onClick={setLightThemeHandler}>Light</button>
       <button onClick={toggleThemeHandler}>Toggle Theme</button>
     </div>
   );
@@ -513,6 +540,18 @@ Display count:
 <h2>{count}</h2>
 ```
 
+Add basic handlers (direct update form):
+
+```jsx
+const incrementHandler = () => {
+  setCount(count + 1);
+};
+
+const decrementHandler = () => {
+  setCount(count - 1);
+};
+```
+
 <details>
 <summary>Complete Counter.jsx (After Step 8 — added count state)</summary>
 
@@ -524,21 +563,37 @@ const Counter = () => {
   const [theme, setTheme] = useState('light');
   const [count, setCount] = useState(0);
 
+  const setDarkThemeHandler = () => {
+    setTheme('dark');
+  };
+
+  const setLightThemeHandler = () => {
+    setTheme('light');
+  };
+
   const toggleThemeHandler = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
+  const incrementHandler = () => {
+    setCount(count + 1);
+  };
+
+  const decrementHandler = () => {
+    setCount(count - 1);
   };
 
   return (
-    <div className={`state ${theme}`}>
+    <div className={`content ${theme}`}>
       <h1>UseState Component</h1>
-      <button onClick={() => setTheme('dark')}>Dark</button>
-      <button onClick={() => setTheme('light')}>Light</button>
+      <button onClick={setDarkThemeHandler}>Dark</button>
+      <button onClick={setLightThemeHandler}>Light</button>
       <button onClick={toggleThemeHandler}>Toggle Theme</button>
 
       <h2>{count}</h2>
 
-      <button>Increment</button>
-      <button>Decrement</button>
+      <button onClick={incrementHandler}>Increment</button>
+      <button onClick={decrementHandler}>Decrement</button>
     </div>
   );
 };
@@ -552,6 +607,16 @@ export default Counter;
 
 ## Step 9: Updating Counter Using Callback
 
+In Step 8 you used the direct update form:
+
+```jsx
+setCount(count + 1);
+```
+
+This is often fine for “one update per click”. However, React may batch updates. If you do multiple updates in the same handler (or multiple handlers run before React finishes rendering), direct updates can reuse the same old value.
+
+To make updates safer when the next value depends on the previous value, use the callback (functional update) form:
+
 ```jsx
 const incrementHandler = () => {
   setCount(prevCount => prevCount + 1);
@@ -564,9 +629,9 @@ const decrementHandler = () => {
 
 ### Why Use a Callback?
 
-* This is the same pattern you used in Step 6: the next value depends on the previous value
-* State updates may be batched
-* Using the previous value guarantees correctness
+* State updates may be batched, so `count` might not be the latest value when the update runs
+* Using the previous value guarantees correctness when the next value depends on the old one
+* Naming convention: prefer descriptive names like `prevCount` / `prevTheme` over very short names like `c` or `t` (short names work, but are harder for beginners to read)
 
 <details>
 <summary>Complete Counter.jsx (After Step 9 — increment/decrement handlers)</summary>
@@ -579,8 +644,16 @@ const Counter = () => {
   const [theme, setTheme] = useState('light');
   const [count, setCount] = useState(0);
 
+  const setDarkThemeHandler = () => {
+    setTheme('dark');
+  };
+
+  const setLightThemeHandler = () => {
+    setTheme('light');
+  };
+
   const toggleThemeHandler = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   const incrementHandler = () => {
@@ -592,10 +665,10 @@ const Counter = () => {
   };
 
   return (
-    <div className={`state ${theme}`}>
+    <div className={`content ${theme}`}>
       <h1>UseState Component</h1>
-      <button onClick={() => setTheme('dark')}>Dark</button>
-      <button onClick={() => setTheme('light')}>Light</button>
+      <button onClick={setDarkThemeHandler}>Dark</button>
+      <button onClick={setLightThemeHandler}>Light</button>
       <button onClick={toggleThemeHandler}>Toggle Theme</button>
 
       <h2>{count}</h2>
@@ -623,8 +696,16 @@ const Counter = () => {
   const [theme, setTheme] = useState('light');
   const [count, setCount] = useState(0);
 
+  const setDarkThemeHandler = () => {
+    setTheme('dark');
+  };
+
+  const setLightThemeHandler = () => {
+    setTheme('light');
+  };
+
   const toggleThemeHandler = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   const incrementHandler = () => {
@@ -636,10 +717,10 @@ const Counter = () => {
   };
 
   return (
-    <div className={`state ${theme}`}>
+    <div className={`content ${theme}`}>
       <h1>UseState Component</h1>
-      <button onClick={() => setTheme('dark')}>Dark</button>
-      <button onClick={() => setTheme('light')}>Light</button>
+      <button onClick={setDarkThemeHandler}>Dark</button>
+      <button onClick={setLightThemeHandler}>Light</button>
       <button onClick={toggleThemeHandler}>Toggle Theme</button>
       <h2>{count}</h2>
       <button onClick={incrementHandler}>Increment</button>
