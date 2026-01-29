@@ -12,7 +12,7 @@ When you finish this practice, you should be able to
 
 ## Clarifications (Read This Once)
 
-- This lab builds a `ContactUs` component (not `Counter.jsx`). Each checkpoint below includes a complete `src/ContactUs.jsx` so you can compare your work or recover if you get stuck.
+- This lab builds a `ContactUs` component. Each checkpoint below includes a complete `src/ContactUs.jsx` so you can compare your work or recover if you get stuck.
 - In React, `<label for="name">` becomes `htmlFor="name"` because `for` is a reserved word in JavaScript.
 - When you add `value={...}` to an `<input>` without an `onChange`, React makes it **read-only** and shows a console warning.
 - `onChange` handlers receive an event object. The current value is usually read from `event.target.value`.
@@ -93,34 +93,88 @@ function ContactUs() {
 export default ContactUs;
 ```
 
-<details>
-<summary>Complete src/ContactUs.jsx (After Step 1)</summary>
+### Optional: Add basic styles (no classes)
 
-```jsx
-function ContactUs() {
-  return (
-    <div>
-      <h2>Contact Us</h2>
-      <form>
-        <div>
-          <label htmlFor='name'>Name:</label>
-          <input id='name' type='text' />
-        </div>
-        <div>
-          <label htmlFor='email'>Email:</label>
-          <input id='email' type='text' />
-        </div>
-        <div>
-          <label htmlFor='phone'>Phone:</label>
-          <input id='phone' type='text' />
-        </div>
-        <button>Submit</button>
-      </form>
-    </div>
-  );
+If you want the form to look nicer while keeping the React code focused on `useState`, add a CSS file that uses **HTML element selectors** only (no class names).
+
+Create:
+
+- `src/ContactUs.css`
+
+<details>
+<summary>Complete src/ContactUs.css (Optional styles)</summary>
+
+```css
+body {
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  margin: 0;
+  padding: 24px 0;
+  background: #f6f7fb;
+  color: #111827;
 }
 
-export default ContactUs;
+h2 {
+  width: min(560px, 92vw);
+  margin: 0 auto 12px;
+}
+
+form {
+  width: min(560px, 92vw);
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border: 1px solid #e6e8f0;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+}
+
+form > div {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+label {
+  font-weight: 600;
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  padding: 10px 12px;
+  border: 1px solid #cfd3e1;
+  border-radius: 8px;
+  outline: none;
+  background: #fff;
+}
+
+textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #6b7cff;
+  box-shadow: 0 0 0 3px rgba(107, 124, 255, 0.2);
+}
+
+button {
+  font: inherit;
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #6b7cff;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #5566ff;
+}
 ```
 
 </details>
@@ -140,6 +194,7 @@ Be sure to update your __App.jsx__ to render the `ContactUs` component:
 // src/App.jsx
 
 import ContactUs from './ContactUs'
+import './ContactUs.css'
 
 function App() {
   return (
@@ -155,6 +210,7 @@ export default App;
 
 ```jsx
 import ContactUs from './ContactUs';
+import './ContactUs.css';
 import './App.css';
 
 function App() {
@@ -343,7 +399,7 @@ component's state update as you type within each of the form fields (i.e., the
 `<input>` elements). You can `console.log(name)` above your return to see this
 change in real time in the console.
 
-![onchange event handler](./img/form.png)
+<!-- ![onchange event handler](./img/form.png) -->
 
 ---
 
