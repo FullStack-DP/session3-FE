@@ -16,10 +16,9 @@ The lab is designed to move gradually from familiar JavaScript concepts to React
 By the end of this lab, you should be able to:
 
 * Understand how events work in vanilla JavaScript vs React
-* Attach event handlers using `onClick` and `onChange`
+* Attach event handlers using `onClick`
 * Explain why normal variables do not update the UI in React
 * Use the `useState` hook to manage component state
-* Toggle state values
 * Update state safely using callback functions
 * Understand the difference between **imperative** and **declarative** programming
 
@@ -61,9 +60,6 @@ Before starting the lab steps, set up a React project so you have a place to run
          <h1>UseState Component</h1>
          <button>Dark</button>
          <button>Light</button>
-         <h2>DISPLAY COUNT HERE</h2>
-         <button>Increment</button>
-         <button>Decrement</button>
       </div>
    );
    };
@@ -147,8 +143,8 @@ This approach works, but it tightly couples HTML and JavaScript together.
 In React:
 
 * Events are written in **camelCase** (e.g. `onClick`, `onChange`)
-* Event handlers are passed **functions**, not strings
-* Logic lives inside the component, not in the HTML
+* Event handlers are passed **functions**, not function calls
+
 
 This keeps UI and behavior organized inside components.
 
@@ -193,19 +189,7 @@ const Counter = () => {
 
 At this stage, we are not changing the UI—just confirming events work.
 
-### Optional: Quick `onChange` demo
 
-`onChange` is typically used with inputs. React passes an event object to your handler, so you can read the current input value from `event.target.value`.
-
-Example:
-
-```jsx
-<input
-  type="text"
-  placeholder="Type here"
-  onChange={event => console.log(event.target.value)}
-/>
-```
 
 <details>
 <summary>Complete Counter.jsx (After Step 2)</summary>
@@ -236,13 +220,7 @@ export default Counter;
 
 ## Step 3: Two Ways to Attach Event Handlers
 
-### Option 1: Inline Arrow Function
-
-```jsx
-<button onClick={() => console.log('Dark clicked')}>Dark</button>
-```
-
-### Option 2: Named Handler Function
+### Option 1: Named Handler Function
 
 ```jsx
 const handleDarkClick = () => {
@@ -251,6 +229,14 @@ const handleDarkClick = () => {
 
 <button onClick={handleDarkClick}>Dark</button>
 ```
+
+
+### Option 2: Inline Arrow Function
+
+```jsx
+<button onClick={() => console.log('Dark clicked')}>Dark</button>
+```
+
 
 ### Important Note
 
