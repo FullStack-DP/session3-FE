@@ -30,8 +30,9 @@ In this pair programming activity, we will transform an existing HTML webpage in
 
 ---------
 
-> [!NOTE] 
-> Try tackling each iteration with your pair first and avoid jumping straight into vibe‑coding. Most iterations have a sample solution [in this file](./fe-pp-sample-sol.md), so if you get stuck, take a look, walk through it carefully, and see what you can learn from it. Once you understand it, think about how you might make the code even better. And yes — using AI to help you understand the solution is totally fine.
+> [!TIP] 
+> - Try tackling each iteration with your pair first. Most iterations have a sample solution [in this file](./fe-pp-sample-sol.md), so if you get stuck, take a look, walk through it, and see what you can learn from it. Once you understand it, think about how you might make the code even better. 
+> - Using AI to help you understand the solution is totally fine.
 
 
 --------
