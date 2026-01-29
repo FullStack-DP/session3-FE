@@ -1,5 +1,5 @@
 
-# React Forms — Core Concepts
+# React Forms: Core Concepts
 
 This document explains the core React concepts of **React Forms - Intro** (Activity 2). The goal is not to memorize code, but to understand the patterns so you can build and debug forms confidently.
 
