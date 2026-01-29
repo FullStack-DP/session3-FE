@@ -95,7 +95,7 @@ export default ContactUs;
 
 ### Optional: Add basic styles (no classes)
 
-If you want the form to look nicer while keeping the React code focused on `useState`, add a CSS file that uses **HTML element selectors** only (no class names).
+If you want the form to look nicer while keeping the React code focused on `useState`, add a CSS file that uses **HTML element selectors**.
 
 Create:
 
