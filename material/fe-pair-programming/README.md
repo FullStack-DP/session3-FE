@@ -1,14 +1,23 @@
 # Front End Pair programming
 
+
+
+
+
+> [!IMPORTANT]
+> - **No vibe coding** (no blind copy/paste). Every student is expected to **review and understand** every line they submit.
+> - If you use AI for help, you must be able to explain your code.
+> - The session **will be recorded** in your laptop so **please remove any personal** items from Desktop
+> - When creating React components, start by building the component structure and functionality (JSX + logic). Add styling only after the component works as intended.
+> - Each component must have at least **two commits**: one after completing the React logic and another after finishing the CSS. Grading will focus **primarily on the component’s structure, not its styling.**
+
+
+-------
+
 In this pair programming activity, we will transform an existing HTML webpage into a React app with the following component structure:
 
 ![](./img/App.png)
 
-<!-- 
-Border shows incorrectly with the image. 
-solution 1: delete:     border: 0.5rem solid var(--clr-primary-5);
-solution 1: delete:   top: -1.5rem;left: -1.5rem; 
--->
 
 ## Setup
 
@@ -21,6 +30,12 @@ solution 1: delete:   top: -1.5rem;left: -1.5rem;
 6. Include in your reflection journal the style you used during the pair programming session. For reference, here’s a brief introduction to the different styles of pair programming: [The Different Styles of Pair Programming](https://www.drovio.com/blog/the-different-styles-of-pair-programming/).  
 
 ## Instructions
+
+
+
+> [!NOTE] 
+> Try tackling each iteration with your pair first and avoid jumping straight into vibe‑coding. Most iterations have a sample solution [in this file](./fe-pp-sample-sol.md), so if you get stuck, take a look, walk through it carefully, and see what you can learn from it. Once you understand it, think about how you might make the code even better. And yes — using AI to help you understand the solution is totally fine.
+
 
 
 ### Iteration 0: Project Setup
