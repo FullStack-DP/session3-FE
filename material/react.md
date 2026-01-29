@@ -1,178 +1,297 @@
-# Theory: React
 
-Creating dynamic, interactive web applications is a core strength of React. We will introduce some fundamental React concepts, including **list rendering**, the **`useState` hook**, and **controlled forms**, by building a simple but powerful single-page application: a To-Do List.
+# React `useState`: Concepts from the Counter Lab
 
----
-### Objective
+This document explains the core concepts introduced in the `useState` Counter + Theme lab. The focus is on how React handles events and UI updates, and why state is the mechanism used to make the UI respond to user actions.
 
-The To-Do List application will allow users to:
-- Add tasks
-- View tasks
-- Delete tasks
+## Learning objectives (what you should be able to explain)
 
-We'll explore key React concepts used in the app, such as state management with the `useState` hook, controlled components, and list rendering using the `.map()` method.
-
----
-## Key Concepts and React Fundamentals
-
-#### 1. State Management with the `useState` Hook
-
-State is an essential concept in React, representing data that can change over time. The `useState` hook is used to manage state in functional components. For our To-Do List application, we will use `useState` to manage two pieces of state:
-- `tasks`: An array of tasks added by the user.
-- `newTask`: A string representing the current input value from the user.
-
-#### 2. Controlled Forms
-
-A controlled component in React is an input element whose value is controlled by React's state. This approach allows us to manage form elements more effectively and handle user input with greater flexibility.
-
-In our app, the task input field is a controlled component where its value is tied to the `newTask` state. When the user types in the input field, an event handler updates the state, ensuring the displayed value is always in sync with the state.
-
-#### 3. List Rendering
-
-React allows us to dynamically render lists of elements using the `.map()` method. This method is crucial when dealing with collections of data that need to be displayed dynamically based on the state. In our To-Do List application, we use `.map()` to render each task in the list.
+- How events work in vanilla JavaScript vs React
+- How to attach event handlers using `onClick` and `onChange`
+- Why normal variables do not update the UI in React
+- How to use the `useState` hook to manage component state
+- How to toggle state values
+- How to update state safely using callback (functional) updates
+- The difference between imperative and declarative programming
 
 ---
-## The To-Do List Application Code
 
-Here’s the complete code for the To-Do List component:
+## 1) Events in web development
 
-```jsx
-import React, { useState } from "react";
+An **event** is a signal that something happened in the browser (for example, a user clicks a button, types into an input, or submits a form). You can attach code that runs when that event occurs.
 
-function ToDoList() {
-  // State for the list of tasks and the new task input
-  const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState("");
+### Vanilla JavaScript events
 
-  // Handle input change and update newTask state
-  function handleInputChange(event) {
-    setNewTask(event.target.value);
-  }
+There are multiple ways to attach events in vanilla JavaScript.
 
-  // Add a new task to the list
-  function addTask() {
-    if (newTask.trim() !== "") {
-      setTasks((t) => [...t, newTask]); // Append new task to the tasks array
-      setNewTask(""); // Clear the input field
-    }
-  }
+**A) HTML attributes (older style)**
 
-  // Delete a task from the list
-  function deleteTask(index) {
-    const updatedTasks = tasks.filter((_, i) => i !== index);
-    setTasks(updatedTasks); // Update the state with the new list
-  }
-
-  return (
-    <div className="to-do-list">
-      <h1>To-Do List</h1>
-
-      <div>
-        <input
-          type="text"
-          placeholder="Enter a task..."
-          value={newTask}
-          onChange={handleInputChange}
-        />
-        <button className="add-button" onClick={addTask}>
-          Add
-        </button>
-      </div>
-
-      <ol>
-        {tasks.map((task, index) => (
-          <li key={index}>
-            <span className="text">{task}</span>
-            <button className="delete-button" onClick={() => deleteTask(index)}>
-              Delete
-            </button>
-          </li>
-        ))}
-      </ol>
-    </div>
-  );
-}
-
-export default ToDoList;
+```html
+<input type="button" value="Click me" onclick="alert('Clicked!')" />
 ```
 
----
-## Breakdown of the Code
+Characteristics:
 
-#### Step-by-Step Explanation:
+- The handler is written as a string in HTML.
+- HTML and JavaScript are tightly coupled.
+- It becomes difficult to organize and reuse logic as the UI grows.
 
-1. **State Management with `useState`**:
-   - The `useState` hook initializes two states: `tasks` (an array to store the list of tasks) and `newTask` (a string to capture the input value).
-   ```jsx
-   const [tasks, setTasks] = useState([]);
-   const [newTask, setNewTask] = useState("");
-   ```
-   - `tasks` holds the list of tasks, while `newTask` is updated every time a user types in the input field.
+**B) `addEventListener` (modern and recommended)**
 
-2. **Controlled Form with Input Element**:
-   - The `<input>` element is a controlled component. Its `value` attribute is tied to the `newTask` state, and the `onChange` event calls `handleInputChange` to update this state.
-   ```jsx
-   <input
-     type="text"
-     placeholder="Enter a task..."
-     value={newTask}
-     onChange={handleInputChange}
-   />
-   ```
-   - `handleInputChange` updates the `newTask` state based on user input:
-   ```jsx
-   function handleInputChange(event) {
-     setNewTask(event.target.value);
-   }
-   ```
+```html
+<button id="btn">Click</button>
 
-3. **Adding Tasks**:
-   - When the "Add" button is clicked, the `addTask` function checks if the `newTask` is not empty, and if so, adds it to the `tasks` array using the spread operator `...` to create a new array with the added task.
-   ```jsx
-   function addTask() {
-     if (newTask.trim() !== "") {
-       setTasks((t) => [...t, newTask]);
-       setNewTask("");
-     }
-   }
-   ```
-   - After adding a task, the `newTask` state is reset to an empty string, clearing the input field.
+<script>
+  const btn = document.querySelector('#btn');
+  btn.addEventListener('click', () => {
+    console.log('Clicked');
+  });
+</script>
+```
 
-4. **Rendering the List of Tasks**:
-   - The tasks are rendered dynamically using the `.map()` method, which iterates over each task in the `tasks` array and creates a `<li>` element.
-   ```jsx
-   {tasks.map((task, index) => (
-     <li key={index}>
-       <span className="text">{task}</span>
-       <button className="delete-button" onClick={() => deleteTask(index)}>
-         Delete
-       </button>
-     </li>
-   ))}
-   ```
-   - Each task has a "Delete" button that calls the `deleteTask` function with the task's index.
+Characteristics:
 
-5. **Deleting Tasks**:
-   - The `deleteTask` function uses the `filter` method to create a new array without the task that matches the given index.
-   ```jsx
-   function deleteTask(index) {
-     const updatedTasks = tasks.filter((_, i) => i !== index);
-     setTasks(updatedTasks);
-   }
-   ```
+- JavaScript logic stays in JavaScript, not inside HTML.
+- You explicitly select DOM elements and attach listeners.
+- You often manually update the DOM after the event (for example, changing classes, text, or styles).
 
-## How This Code Illustrates React Fundamentals
+### React events
 
-1. **`useState` Hook**: Manages dynamic data (the task list and input value), enabling real-time updates and re-rendering of the component.
-   
-2. **Controlled Components**: Ensures the form input is in sync with the component state, providing controlled and predictable behavior for user interactions.
-   
-3. **List Rendering**: Utilizes the `.map()` method to dynamically create and update the list of tasks in response to user actions.
+In React, you still handle browser events (clicks, input changes, etc.), but you attach them through JSX props:
+
+- Event names use **camelCase**: `onClick`, `onChange`, `onSubmit`, …
+- You pass a **function**, not a string.
+- In most cases you update **state**, and React updates the UI.
+
+Example:
+
+```jsx
+<button onClick={handleClick}>Click</button>
+```
+
+React uses a consistent event system (often referred to as “synthetic events”) so the handler receives an event object in a predictable way across browsers.
 
 ---
-## Conclusion
 
-By following this example, you will have a fundamental understanding of how to build dynamic, interactive applications using React components. The To-Do List app demonstrates key concepts like state management with the `useState` hook, controlled forms, and list rendering — all essential skills for building modern web applications. Experiment with these concepts to expand your understanding and apply them to more complex React applications in the future.
+## 2) Attaching event handlers with `onClick` and `onChange`
+
+### `onClick`
+
+`onClick` runs when the user clicks an element (commonly a button).
+
+```jsx
+const handleClick = () => {
+  console.log('Button clicked');
+};
+
+<button onClick={handleClick}>Increment</button>
+```
+
+Important rule: pass the **function reference**, do not call the function.
+
+❌ Incorrect (runs immediately during render):
+
+```jsx
+<button onClick={handleClick()}>Click</button>
+```
+
+✅ Correct (runs only on click):
+
+```jsx
+<button onClick={handleClick}>Click</button>
+```
+
+### `onChange`
+
+`onChange` is commonly used with inputs. In React, `onChange` fires as the user types (for text inputs).
+
+```jsx
+const handleNameChange = event => {
+  console.log('New value:', event.target.value);
+};
+
+<input type="text" onChange={handleNameChange} />
+```
+
+In practice, `onChange` is often used to store the input value in state (this is the typical “controlled input” pattern):
+
+```jsx
+const [name, setName] = useState('');
+
+<input
+  type="text"
+  value={name}
+  onChange={event => setName(event.target.value)}
+/>
+```
+
+This makes the input’s displayed value come from React state, and changes flow through the state update.
+
+---
+
+## 3) Why normal variables do not update the UI in React
+
+In React, a component’s UI is produced by running the component function and returning JSX. React updates the screen when it decides the component should **re-render**.
+
+If you write:
+
+```js
+let theme = 'light';
+```
+
+and later do:
+
+```js
+theme = 'dark';
+```
+
+React does not automatically know that it should re-render. A normal variable changing does not trigger a re-render.
+
+Two practical consequences:
+
+- The UI will not update just because a normal variable changed.
+- Even if the component re-renders for some other reason, normal variables inside the component can reset because the function runs again from the top.
+
+React is designed around the idea that **state and props** are the values that drive rendering.
+
+---
+
+## 4) What “state” is and why it solves the problem
+
+**State** is component-owned data that can change over time. When you update state with the provided setter function, React schedules a re-render so the UI can be recalculated.
+
+In other words:
+
+- **State changes → React re-renders → UI updates**
+
+This is the central reason `useState` exists.
+
+---
+
+## 5) The `useState` hook
+
+`useState` is a React Hook that lets a function component store and update state.
+
+Syntax:
+
+```jsx
+const [value, setValue] = useState(initialValue);
+```
+
+Meaning:
+
+- `value` is the current state value.
+- `setValue` is the function you call to request an update.
+- `initialValue` is the starting value used on the first render.
+
+Example (theme):
+
+```jsx
+const [theme, setTheme] = useState('light');
+```
+
+When you call `setTheme('dark')`, React updates the state and re-renders the component. On the next render, `theme` will be `'dark'`, and any JSX that uses `theme` will reflect that.
+
+---
+
+## 6) Toggling state values
+
+Toggling means switching between two states based on the current value.
+
+Common examples:
+
+- `'light'` ↔ `'dark'`
+- `true` ↔ `false`
+
+Theme toggle example:
+
+```jsx
+const toggleTheme = () => {
+  setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+};
+```
+
+This pattern is important because the next state depends on the previous state.
+
+---
+
+## 7) Updating state safely with callback (functional) updates
+
+When the next state depends on the previous state, the safest pattern is the **functional update** form:
+
+```jsx
+setCount(prevCount => prevCount + 1);
+```
+
+Why this matters:
+
+- React may batch multiple state updates together.
+- If you read `count` directly in your handler, you might read a value that is not the final “latest” value at the time React applies updates.
+
+Example of where functional updates help:
+
+```jsx
+const addThree = () => {
+  setCount(prev => prev + 1);
+  setCount(prev => prev + 1);
+  setCount(prev => prev + 1);
+};
+```
+
+This reliably adds 3 because each update is computed from the latest previous value.
+
+---
+
+## 8) Imperative vs declarative programming
+
+### Imperative (describe how)
+
+In an imperative style, you describe step-by-step DOM instructions.
+
+Example (vanilla JavaScript theme toggle):
+
+```js
+const root = document.querySelector('.state');
+root.classList.remove('light');
+root.classList.add('dark');
+```
+
+This approach can work, but as the UI grows it becomes easier to miss an update or create inconsistent UI state.
+
+### Declarative (describe what)
+
+In React, you describe what the UI should look like for a given state:
+
+```jsx
+<div className={`state ${theme}`}></div>
+```
+
+Then you update state:
+
+```jsx
+setTheme('dark');
+```
+
+React determines how to update the DOM to match the new UI description.
+
+---
+
+## Key takeaways
+
+- React events use JSX props like `onClick` and `onChange` and expect function values.
+- Normal variables do not trigger re-renders, so they do not reliably update the UI.
+- `useState` stores values that should drive rendering; calling the setter triggers re-render.
+- When computing next state from previous state, use functional updates like `setCount(prev => prev + 1)`.
+- React is primarily declarative: describe UI from state instead of manually manipulating the DOM.
+
+## Final mental model
+
+In React, the most reliable workflow is:
+
+1. User triggers an event (`onClick`, `onChange`, …)
+2. Event handler updates state (`setTheme(...)`, `setCount(...)`)
+3. React re-renders the component
+4. The UI updates to match the new state
+
 
 ---
 ## Links
