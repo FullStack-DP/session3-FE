@@ -202,7 +202,22 @@ Common examples:
 - `'light'` ↔ `'dark'`
 - `true` ↔ `false`
 
-Theme toggle example:
+Theme toggle can be written in two common ways.
+
+**A) Direct update (simple and readable)**
+
+```jsx
+const toggleTheme = () => {
+  setTheme(theme === 'light' ? 'dark' : 'light');
+};
+```
+
+This is often fine when:
+
+- you only do one toggle per event handler, and
+- you are not scheduling multiple updates that depend on the same value.
+
+**B) Functional update (safer when the next value depends on the previous)**
 
 ```jsx
 const toggleTheme = () => {
@@ -210,13 +225,21 @@ const toggleTheme = () => {
 };
 ```
 
-This pattern is important because the next state depends on the previous state.
+The functional update form becomes important when multiple updates can happen close together (React may batch updates), because it always calculates from the most recent previous value.
 
 ---
 
 ## 7) Updating state safely with callback (functional) updates
 
-When the next state depends on the previous state, the safest pattern is the **functional update** form:
+When the next state depends on the previous state, the safest pattern is the **functional update** form.
+
+First, here is the direct form (often works, but can be fragile in some cases):
+
+```jsx
+setCount(count + 1);
+```
+
+Then, here is the functional update form (recommended when the next value depends on the previous value):
 
 ```jsx
 setCount(prevCount => prevCount + 1);
@@ -239,6 +262,11 @@ const addThree = () => {
 
 This reliably adds 3 because each update is computed from the latest previous value.
 
+Naming convention:
+
+- Prefer descriptive names like `prevCount` / `prevTheme` for clarity.
+- Very short names like `c` or `t` are valid, but they reduce readability (especially for beginners).
+
 ---
 
 ## 8) Imperative vs declarative programming
@@ -250,7 +278,7 @@ In an imperative style, you describe step-by-step DOM instructions.
 Example (vanilla JavaScript theme toggle):
 
 ```js
-const root = document.querySelector('.state');
+const root = document.querySelector('.content');
 root.classList.remove('light');
 root.classList.add('dark');
 ```
@@ -262,7 +290,7 @@ This approach can work, but as the UI grows it becomes easier to miss an update 
 In React, you describe what the UI should look like for a given state:
 
 ```jsx
-<div className={`state ${theme}`}></div>
+<div className={`content ${theme}`}></div>
 ```
 
 Then you update state:
@@ -280,7 +308,7 @@ React determines how to update the DOM to match the new UI description.
 - React events use JSX props like `onClick` and `onChange` and expect function values.
 - Normal variables do not trigger re-renders, so they do not reliably update the UI.
 - `useState` stores values that should drive rendering; calling the setter triggers re-render.
-- When computing next state from previous state, use functional updates like `setCount(prev => prev + 1)`.
+- When computing next state from previous state, prefer functional updates like `setCount(prev => prev + 1)`.
 - React is primarily declarative: describe UI from state instead of manually manipulating the DOM.
 
 ## Final mental model
